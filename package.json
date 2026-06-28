@@ -10,11 +10,9 @@
     "start": "node artifacts/api-server/dist/index.mjs"
   },
   "private": true,
-  "pnpm": {
-    "overrides": {
-      "react": "19.1.0",
-      "react-dom": "19.1.0"
-    }
+  "resolutions": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "prettier": "^3.8.3",
