@@ -70,7 +70,7 @@ router.post("/products", requireAdmin, async (req, res) => {
 
 router.put("/products/:id", requireAdmin, async (req, res) => {
   try {
-    const id = parseInt(req.params.id as string, 10);
+    const id = parseInt(String(req.params.id), 10);
     if (isNaN(id)) { res.status(400).json({ error: "Invalid id" }); return; }
     const parsed = insertProductSchema.safeParse(req.body);
     if (!parsed.success) {
@@ -88,7 +88,7 @@ router.put("/products/:id", requireAdmin, async (req, res) => {
 
 router.delete("/products/:id", requireAdmin, async (req, res) => {
   try {
-    const id = parseInt(req.params.id as string, 10);
+    const id = parseInt(String(req.params.id), 10);
     if (isNaN(id)) { res.status(400).json({ error: "Invalid id" }); return; }
     const [row] = await db.delete(productsTable).where(eq(productsTable.id, id)).returning();
     if (!row) { res.status(404).json({ error: "Not found" }); return; }

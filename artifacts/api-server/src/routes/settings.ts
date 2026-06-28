@@ -48,7 +48,7 @@ router.put("/settings", requireAdmin, async (req, res) => {
       await db
         .insert(settingsTable)
         .values({ key, value })
-        .onConflictDoUpdate({ target: settingsTable.key, set: { value, updatedAt: new Date().toISOString() } });
+        .onConflictDoUpdate({ target: settingsTable.key, set: { value, updatedAt: String(new Date().toISOString()) } });
     }
     const rows = await db.select().from(settingsTable);
     const result: Record<string, string> = { ...DEFAULT_SETTINGS };
