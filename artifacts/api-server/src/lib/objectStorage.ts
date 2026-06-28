@@ -261,7 +261,7 @@ async function signObjectURL({
         `make sure you're running on Replit`
     );
   }
-  const data = (await response.json()) as { signed_url: string };
-  return data.signed_url;
-}
 
+  const { signed_url: signedURL } = await response.json();
+  return signedURL;
+}

@@ -50,7 +50,7 @@ router.get("/submissions", requireAdmin, async (req, res) => {
 
 router.patch("/submissions/:id/read", requireAdmin, async (req, res) => {
   try {
-    const id = parseInt(String(req.params.id), 10);
+    const id = parseInt(req.params.id, 10);
     if (isNaN(id)) { res.status(400).json({ error: "Invalid id" }); return; }
     const [row] = await db.update(submissionsTable).set({ read: true }).where(eq(submissionsTable.id, id)).returning();
     if (!row) { res.status(404).json({ error: "Not found" }); return; }
@@ -63,7 +63,7 @@ router.patch("/submissions/:id/read", requireAdmin, async (req, res) => {
 
 router.delete("/submissions/:id", requireAdmin, async (req, res) => {
   try {
-    const id = parseInt(String(req.params.id), 10);
+    const id = parseInt(req.params.id, 10);
     if (isNaN(id)) { res.status(400).json({ error: "Invalid id" }); return; }
     await db.delete(submissionsTable).where(eq(submissionsTable.id, id));
     res.status(204).send();
