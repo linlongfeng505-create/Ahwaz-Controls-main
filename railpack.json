@@ -1,0 +1,10 @@
+{
+  "deploy": {
+    "startCommand": "pnpm --filter @workspace/api-server start"
+  },
+  "steps": {
+    "build": {
+      "command": "pnpm --filter @workspace/ahwaz-website build && pnpm --filter @workspace/api-server build"
+    }
+  }
+}
